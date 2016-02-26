@@ -17,12 +17,20 @@
             <ul>
             </ul>
         </nav>
+        <button>no</button>
+        <button>yes</button>
     </header>
 
     <section id="start">
-        <div id="houses-template">
+        <div id="houses_template">
             <article >
-                <p data-bind="adres"></p>
+            <img data-bind="main_img">
+            <div data-bind="Media" class="images">
+                <figure>
+                    <img data-bind="extra_media">
+                </figure>
+            </div>
+                <!-- <p data-bind="Adres"></p> -->
             </article>
         </div>
     </section>

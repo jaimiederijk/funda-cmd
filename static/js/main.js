@@ -13,7 +13,7 @@
 			routes.init();
 			//googleMap.setupMap();
 			//sections.refreshIssMarker.markerInterval();
-			//ui.setupEvents();
+			ui.setupEvents();
 			//ui.setupGestures();
 		}
 	};

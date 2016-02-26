@@ -4,8 +4,11 @@ var sections = require('./sections');
 var ui = {
 	setupEvents : function () {
 		document.addEventListener("touchstart", function(){}, true)
-		htmlElements.movieSearch.addEventListener("submit", function () {
-				sections.setupMovieSearched(event.target[0].value);
+		htmlElements.buttonNo.addEventListener("click", function () {
+			sections.handleHouseChoice(false);
+		});
+		htmlElements.buttonYes.addEventListener("click", function () {
+			sections.handleHouseChoice(true);
 		});
 	},
 	setupGestures : function () {

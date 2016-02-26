@@ -1,105 +1,64 @@
-nav ul {
+body {
   margin: 0;
-	display: flex;
-	flex-wrap:  wrap;
-}
-nav a {
-	transition: 0.1s;
-	color: white;
-  font-size: 1.5em;
+
+  overflow-x: hidden;
   font-family: 'Open Sans', 'Helvetica Neue', 'Arial', sans-serif;
-  text-decoration: none;
-	background-color: rgb(61, 53, 139);
-	display: block;
-	padding: 2rem;
+}
+img {
+  width: 100%;
+}
+
+.images {
+  display: flex;
+  flex-wrap:  wrap;
+}
+article > img {
+  max-width: 40em;
+}
+
+button {
+    position: fixed;
+    top: 50vh;
+    z-index: 5;
+    right: 0;
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+}
+button:first-of-type {
+  left: 0;
+}
+
+nav a {
+  font-size: 1.5em;
 }
 nav li {
 	list-style: none;
-    margin: 2em;
+  margin: 2em;
 }
-body {
-  margin: 0;
-	width:100vw;
-	overflow: hidden;
-}
-header {
-  background-image: linear-gradient(90deg,#CAAF77 11px, transparent 0), 
-            linear-gradient(90deg,#A3B153 23px, transparent 0), 
-            linear-gradient(90deg,#BEBEBE 41px, transparent 0);
-  background-size: 41px 100%, 61px 100%, 83px 100%;
-}
-section {
-	max-width: 35em;
-	transition:1s;
-	position: absolute;
-	-webkit-transform: translate3d(0, 0, 0);
-   -moz-transform: translate3d(0, 0, 0);
-   -ms-transform: translate3d(0, 0, 0);
-   transform: translate3d(0, 0, 0);
-   transform: translateX(200em);
-}
-article a {
-	text-decoration: none;
-	color: black;
-}
-article:hover {
-	background-color: rgba(233,233,233,0.5);
-}
-/*section {
-   -webkit-transform: translate3d(0, 0, 0);
-   -moz-transform: translate3d(0, 0, 0);
-   -ms-transform: translate3d(0, 0, 0);
-   transform: translate3d(0, 0, 0);
-}*/
 
-#template-movies {
-	transform-origin: top;
-	background-color: rgb(220,220,220);
-	width: 35em;
-	min-height:1px;
-	z-index: -5;
+header {
+
 }
-@keyframes slideDown{
-  from {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  to {
-    transform: scaleY(500);
-    opacity: 1;
-  }
-}
-.load-movies {
-	animation-name: slideDown;
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
-    animation-direction:  normal;
-    animation-fill-mode: forwards;
-}
-.hidden {
-	opacity: 0;
-	z-index: -2;
-}
-.show {
-  padding-left: 2rem;
-  padding-right: 2rem;
+
+section {
+	/*max-width: 35em;*/
+	transition:1s;
+	/*position: absolute;*/
+  /*use gpu*/
 	-webkit-transform: translate3d(0, 0, 0);
    -moz-transform: translate3d(0, 0, 0);
    -ms-transform: translate3d(0, 0, 0);
    transform: translate3d(0, 0, 0);
-   transform: translateX(0);
+   /*transform: translateX(200em);*/
 }
-.notransition {
-	transition:none;
-}
+
+
+
 #map-canvas{
   height: 660px;
   width: 90vw;
   max-width: 40em;
-}
-a:active {
-	background-color: green;
-	transform: translateY(5px);
 }
 
 /*http://projects.lukehaas.me/css-loaders/*/
@@ -161,6 +120,7 @@ a:active {
     height: 5em;
   }
 }
+
 
 @media (max-width: 35.625em) { /* 570px */
   html {

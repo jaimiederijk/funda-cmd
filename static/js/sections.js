@@ -11,17 +11,43 @@ var sections = {
 			//sections[i].classList.remove("notransition");
 		};
 	},
+	handleHouseChoice : function (selection) {
+		data.seenList.push(data.currentHouse.InternalId)
+		var posorneg = selection ? "positiveQueries":"negativeQueries";
+		data.addQueries(posorneg);
+		data.createNewQuery();
+	},
 	displaySection : function (sectionName) {
 		this.hideAllSections();
 		var section = htmlElements[sectionName];
 		section.classList.remove("hidden");
 		section.classList.add("show");
 	},
-	renderHouses : function (data) {
+	renderHouses : function (housedata) {
 		var temp = htmlElements.houses;
-		var housesData = data;
-		debugger
-		Transparency.render(temp, housesData.objects);
+		var housesData = housedata;
+
+		var directives = {
+			main_img : {
+				src: function(params) {
+					return this.HoofdFoto;
+				}
+			},
+			Media : {
+				extra_media : {
+					src: function (params) {
+						if (this.ContentType ===1 || this.ContentType ===20) {
+							return this.MediaItems[2].Url
+						
+						} else {
+							//debugger
+						}
+					}
+				}
+			}
+		}
+
+		Transparency.render(temp, housesData, directives);
 	}
 };
 

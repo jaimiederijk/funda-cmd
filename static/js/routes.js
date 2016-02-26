@@ -7,11 +7,11 @@ var routes = {
 		routie('', function() {
 			sections.displaySection("home");
 			var input={
-				query:"amsterdam",
+				query:"amsterdam/woonhuis",
 				page:1,
 				size:1
 			};
-			data.searchFunda(input,"crap");
+			data.searchFunda(input);
 		});
 	}
 
