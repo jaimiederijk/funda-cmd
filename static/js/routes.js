@@ -13,6 +13,12 @@ var routes = {
 			};
 			data.searchFunda(input);
 		});
+		routie(':hash', function(hash) {
+
+			if (!document.getElementById(hash)) {
+				routie('');
+			}
+		});
 	}
 
 };

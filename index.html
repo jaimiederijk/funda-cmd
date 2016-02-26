@@ -17,19 +17,31 @@
             <ul>
             </ul>
         </nav>
-        <button>no</button>
-        <button>yes</button>
+        <button></button>
+        <button></button>
     </header>
 
     <section id="start">
         <div id="houses_template">
             <article >
-            <img data-bind="main_img">
-            <div data-bind="Media" class="images">
-                <figure>
-                    <img data-bind="extra_media">
-                </figure>
-            </div>
+                <img data-bind="main_img">
+                <article>
+                    <h2 data-bind="Adres"></h2>
+                    <span>&euro;<span data-bind="KoopPrijs"></span></span>
+                    <p>
+                        <span data-bind="WoonOppervlakte"></span> m² / 
+                        <span data-bind="PerceelOppervlakte"></span> m² • 
+                        <span data-bind="AantalKamers"></span> kamers
+                    </p>
+                </article>        
+                <div data-bind="Media" class="images">
+                    <figure data-bind="extra_media_id">
+                        <a data-bind="extra_media_link">
+                            <img data-bind="extra_media">
+                        </a>
+                    </figure>
+                </div>
+                
                 <!-- <p data-bind="Adres"></p> -->
             </article>
         </div>

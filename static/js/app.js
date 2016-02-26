@@ -8,6 +8,11 @@ var data = {
 	negativeQueries: [],
 	//newQuery: {},
 	seenList: [],
+	createQueryConfig : {
+		page:1,
+		size:25,
+		newQueryAttempts:5
+	},
 	addQueries : function (posorneg) {
 		this[posorneg].push({
 			soort:data.currentHouse.ObjectType,
@@ -20,23 +25,24 @@ var data = {
 	},
 	createNewQuery : function () {
 		var input={};
-		var queryCreator = require('./queryCreator');
-		var city = geoplugin_city();
-		var soort = queryCreator.soort()
-		var query; 
-		if (city =="") {
-			city="amsterdam"
+		var queryCreator = require('./queryCreator');	
+		var soort = queryCreator.soort();
+		var query;
+
+		if(createQueryConfig.newQueryAttempts<1) {
+			console.log("no houses found");
+			return
 		}
-		query = city + "/" + soort + "/" + queryCreator.kamers() + "/" + queryCreator.woonoppervlakte() + "/" + queryCreator.perceeloppervlakte() + "/" + queryCreator.prijs();
+		query = queryCreator.city() + "/" + soort + "/" + queryCreator.kamers() + "/" + queryCreator.woonoppervlakte() + "/" + queryCreator.perceeloppervlakte() + "/" + queryCreator.prijs();
 		if (soort=="woonhuis") {
 			query += "/" + queryCreator.energielabel();
 		}
 		input = {
 			query:query,
-			page:1,
-			size:25
+			page:data.createQueryConfig.page,
+			size:data.createQueryConfig.size
 		}
-		this.searchFunda(input)
+		this.searchFunda(input);
 	},
 	searchFunda : function (input) {//input should be a object that contains query , pagnumber(page) and pagesize(size)
 		var query = input;
@@ -45,7 +51,7 @@ var data = {
 		var self = this;
 		promise.get(url).then(function(error, text, xhr){
 			if (error) {
-		        alert('Error ' + xhr.status);
+		        console.log('Error ' + xhr.status);
 		        return;
 		    }
 		    // console.log(text)
@@ -55,11 +61,24 @@ var data = {
 		})
 	},
 	filterHasShown : function(searchedHouses) {
-
-		var goodArray = _.filter( searchedHouses.Objects,function(item) {
-			return !_.contains(data.seenList, item.id); 
+		var goodArray;
+		var id;
+		if (searchedHouses.Objects.length < 1) {//query does not give results
+			data.createQueryConfig.newQueryAttempts -= 1;
+			data.createNewQuery();
+			return
+		}
+		goodArray = _.filter( searchedHouses.Objects,function(item) {
+			return !_.contains(data.seenList, item.Id);
 		});
-		var id = goodArray[0].Id;
+		if (goodArray.length < 1) {// has seen all thas has been searched
+			data.createQueryConfig.page += 1;
+			data.createNewQuery();
+			return
+		}
+
+		id = goodArray[0].Id;
+		data.createQueryConfig.newQueryAttempts=5;
 		this.getFundaObject(id);
 	},
 	getFundaObject : function (id) {//
@@ -178,6 +197,13 @@ var data = require('./data');
 // all the logic for creating a new query
 // nederlandse objecten omdat de data nederlands is
 var queryCreator = {
+	city : function () {
+		var city = geoplugin_city();
+		if (city =="") {
+			city="amsterdam";
+		}
+		return city
+	},
 	soort : function () {	
 		var soortFilter;
 		var posSize = _.size(data.positiveQueries);
@@ -248,6 +274,12 @@ var routes = {
 			};
 			data.searchFunda(input);
 		});
+		routie(':hash', function(hash) {
+
+			if (!document.getElementById(hash)) {
+				routie('');
+			}
+		});
 	}
 
 };
@@ -290,6 +322,16 @@ var sections = {
 				}
 			},
 			Media : {
+				extra_media_id : {
+					id: function (params) {
+						return this.Id
+					}
+				},
+				extra_media_link : {
+					href: function (params) {
+						return "#" + this.Id
+					}
+				},
 				extra_media : {
 					src: function (params) {
 						if (this.ContentType ===1 || this.ContentType ===20) {

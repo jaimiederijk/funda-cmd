@@ -34,6 +34,16 @@ var sections = {
 				}
 			},
 			Media : {
+				extra_media_id : {
+					id: function (params) {
+						return this.Id
+					}
+				},
+				extra_media_link : {
+					href: function (params) {
+						return "#" + this.Id
+					}
+				},
 				extra_media : {
 					src: function (params) {
 						if (this.ContentType ===1 || this.ContentType ===20) {

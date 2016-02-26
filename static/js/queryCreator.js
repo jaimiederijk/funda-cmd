@@ -3,6 +3,13 @@ var data = require('./data');
 // all the logic for creating a new query
 // nederlandse objecten omdat de data nederlands is
 var queryCreator = {
+	city : function () {
+		var city = geoplugin_city();
+		if (city =="") {
+			city="amsterdam";
+		}
+		return city
+	},
 	soort : function () {	
 		var soortFilter;
 		var posSize = _.size(data.positiveQueries);

@@ -4,30 +4,62 @@ body {
   overflow-x: hidden;
   font-family: 'Open Sans', 'Helvetica Neue', 'Arial', sans-serif;
 }
+
 img {
   width: 100%;
 }
-
 .images {
   display: flex;
   flex-wrap:  wrap;
+  justify-content: space-around;
 }
+figure {
+  width: 40vw;
+  margin:0;
+}
+figure:target {
+  width: 100vw;
+}
+
+header {
+  height: 3em;
+  position: fixed;
+  z-index: 5;
+  background-color: #F8B000;
+  width: 100vw;
+}
+header button{
+    position: fixed;
+    right: 0;
+    width: 6em;
+    height: 3rem;
+    top: 0;
+    padding: 0;
+    border: none;
+    background-color: rgb(49,138,48);
+    background-image: url('../images/thumb-up.png');
+    background-repeat: no-repeat;
+    background-size: 3em;
+    background-position: center;
+}
+header button:first-of-type {
+  background-color: rgb(163,46,46);
+  background-image: url('../images/thumb-down.png');
+  left: 0;
+} 
+
+
 article > img {
   max-width: 40em;
 }
+article h2 {
+  color: #3888C5;
+}
+article article {
+  padding: 0 2em;
+}
 
-button {
-    position: fixed;
-    top: 50vh;
-    z-index: 5;
-    right: 0;
-    width: 6em;
-    height: 6em;
-    border-radius: 50%;
-}
-button:first-of-type {
-  left: 0;
-}
+
 
 nav a {
   font-size: 1.5em;
@@ -37,11 +69,9 @@ nav li {
   margin: 2em;
 }
 
-header {
-
-}
 
 section {
+  padding-top: 3em;
 	/*max-width: 35em;*/
 	transition:1s;
 	/*position: absolute;*/
@@ -123,13 +153,5 @@ section {
 
 
 @media (max-width: 35.625em) { /* 570px */
-  html {
-    font-size: 0.8rem;
-  }
-  nav a {
-    padding: 1rem;
-  }
-  nav li {
-    margin: 1rem;
-  }
+
 }
