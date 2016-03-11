@@ -29,7 +29,7 @@ var data = {
 		var soort = queryCreator.soort();
 		var query;
 
-		if(createQueryConfig.newQueryAttempts<1) {
+		if(this.createQueryConfig.newQueryAttempts<1) {
 			console.log("no houses found");
 			return
 		}
@@ -229,7 +229,7 @@ var queryCreator = {
 		return soortFilter
 	},
 	kamers : function () {
-		var laag = data.positiveQueries[0].kamers;
+		var laag = 0;//data.positiveQueries[0].kamers
 		var hoog = 10;
 		var kamerFilter = laag + "-" + hoog + "-kamers"; 
 		return kamerFilter
